@@ -16,9 +16,9 @@ elif [ "$TRAVIS_JDK_VERSION" != "$JDK" ]; then
   echo "Skipping deployment: wrong JDK. Expected '$JDK' but was '$TRAVIS_JDK_VERSION'."
 elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "Skipping deployment: was pull request."
-elif [ "$TRAVIS_BRANCH" != "$BRANCH" ]; then
-  echo "Skipping deployment: wrong branch. Expected '$BRANCH' but was '$TRAVIS_BRANCH'."
-else
+#elif [ "$TRAVIS_BRANCH" != "$BRANCH" ]; then
+ # echo "Skipping deployment: wrong branch. Expected '$BRANCH' but was '$TRAVIS_BRANCH'."
+#else
   echo "Deploying ..."
   # made with "travis encrypt-file signingkey.asc -r SpoonLabs/com --add"
   openssl aes-256-cbc -K $encrypted_9809c3ea697e_key -iv $encrypted_9809c3ea697e_iv -in .buildscript/signingkey.asc.enc -out signingkey.asc -d
