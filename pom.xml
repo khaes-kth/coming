@@ -122,15 +122,16 @@
 			<version>2.11.1</version>
 		</dependency>
 
-		<!--one alternative lib is JCommander, but not recommend Apache Commons CLI-->
+		<!--one alternative lib is JCommander, but not recommend Apache Commons 
+			CLI -->
 		<dependency>
 			<groupId>info.picocli</groupId>
 			<artifactId>picocli</artifactId>
 			<version>3.8.2</version>
 		</dependency>
 
-		<!--this is used to read and unpack siva files from Public Git Archive-->
-		<!--if it is outdated then turn to use go-siva which is mainly maintained-->
+		<!--this is used to read and unpack siva files from Public Git Archive -->
+		<!--if it is outdated then turn to use go-siva which is mainly maintained -->
 		<dependency>
 			<groupId>tech.sourced</groupId>
 			<artifactId>siva-java</artifactId>
@@ -138,6 +139,19 @@
 		</dependency>
 
 	</dependencies>
+
+
+	<distributionManagement>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>ossrh-snapshot</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<repositories>
 		<repository>
 			<id>inria</id>
