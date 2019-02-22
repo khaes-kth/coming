@@ -8,6 +8,8 @@ SLUG="SpoonLabs/coming"
 JDK="oraclejdk8"
 BRANCH="master"
 
+echo "Run deploy_to_maven"
+
 set -e
 
 if [ "$TRAVIS_REPO_SLUG" != "$SLUG" ]; then
@@ -18,11 +20,13 @@ elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "Skipping deployment: was pull request."
 #elif [ "$TRAVIS_BRANCH" != "$BRANCH" ]; then
  # echo "Skipping deployment: wrong branch. Expected '$BRANCH' but was '$TRAVIS_BRANCH'."
-#else
+ else
   echo "Deploying ..."
   # made with "travis encrypt-file signingkey.asc -r SpoonLabs/com --add"
   openssl aes-256-cbc -K $encrypted_9809c3ea697e_key -iv $encrypted_9809c3ea697e_iv -in .buildscript/signingkey.asc.enc -out signingkey.asc -d
   gpg --fast-import signingkey.asc
+  
+  echo "After gpg"
 
   # getting the previous version on Maven Central
 #  PREVIOUS_MAVEN_CENTRAL_VERSION=`curl "http://search.maven.org/solrsearch/select?q=a:gumtree-spoon-ast-diff+g:fr.inria.gforge.spoon.labs&rows=20&wt=json" | jq -r .response.docs[0].latestVersion | egrep -o "[0-9]+$"`
