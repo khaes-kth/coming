@@ -12,8 +12,6 @@ install: mvn install -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true
 script: mvn test -P !build-extras -B
   
 before_install:
-- openssl aes-256-cbc -K $encrypted_a263e63e6aa6_key -iv $encrypted_a263e63e6aa6_iv
-  -in codesigning.asc.enc -out ./.buildscript/codesigning.asc -d
 - sed -i -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g'
   ~/.m2/settings.xml
 - unzip ./src/main/resources/repogit4testv0.zip
