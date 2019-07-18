@@ -10,7 +10,7 @@ before_install:
 - sed -i -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g'
   ~/.m2/settings.xml
 - unzip ./src/main/resources/repogit4testv0.zip
-install: mvn -DskipTests -Dgpg.skip install
+#install: mvn -DskipTests -Dgpg.skip install
 after_success:
 - ".buildscript/deploy_to_maven.sh"
 env:
