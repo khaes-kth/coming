@@ -23,9 +23,11 @@ elif [ "$TRAVIS_JDK_VERSION" != "$JDK" ]; then
  else
   echo "Deploying ..."
   # made with "travis encrypt-file signingkey.asc -r SpoonLabs/coming --add"
-  openssl aes-256-cbc -K $encrypted_a263e63e6aa6_key -iv $encrypted_a263e63e6aa6_iv -in .buildscript/signingkey.asc.enc -out signingkey.asc -d
+ # openssl aes-256-cbc -K $encrypted_a263e63e6aa6_key -iv $encrypted_a263e63e6aa6_iv -in .buildscript/signingkey.asc.enc -out signingkey.asc -d
+  openssl aes-256-cbc -K $encrypted_a263e63e6aa6_key -iv $encrypted_a263e63e6aa6_iv -in ./.buildscript/codesigning.asc.enc -out ./.buildscript/codesigning.asc -d
   echo "Before gpg"
-  gpg2 --fast-import signingkey.asc
+ # gpg2 --fast-import signingkey.asc
+  gpg2 --fast-import ./.buildscript/codesigning.asc
   
   echo "After gpg"
   #gpg-agent
@@ -37,6 +39,7 @@ elif [ "$TRAVIS_JDK_VERSION" != "$JDK" ]; then
   # and incrementing it
   mvn versions:set -DnewVersion=1.$((PREVIOUS_MAVEN_CENTRAL_VERSION+1))
   echo "Starting deployment using maven deploy ..."
-  mvn -Prelease deploy --settings .buildscript/settings.xml -Dmaven.test.skip=true
+  #mvn -Prelease deploy --settings .buildscript/settings.xml -Dmaven.test.skip=true
+   mvn deploy -P sign,build-extras --settings ./.buildscript/settings.xml -Dmaven.test.skip=true
   echo "Well deployed!"
 fi
