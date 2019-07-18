@@ -28,7 +28,7 @@ elif [ "$TRAVIS_JDK_VERSION" != "$JDK" ]; then
   gpg2 --fast-import signingkey.asc
   
   echo "After gpg"
-  gpg-agent
+  #gpg-agent
 
   # getting the previous version on Maven Central
 #  PREVIOUS_MAVEN_CENTRAL_VERSION=`curl "http://search.maven.org/solrsearch/select?q=a:gumtree-spoon-ast-diff+g:fr.inria.gforge.spoon.labs&rows=20&wt=json" | jq -r .response.docs[0].latestVersion | egrep -o "[0-9]+$"`
