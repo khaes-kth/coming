@@ -14,6 +14,7 @@ before_install:
 - sed -i -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g'
   ~/.m2/settings.xml
 - unzip ./src/main/resources/repogit4testv0.zip
+- git clone https://github.com/Bukkit/Bukkit.git
 
 # in Java/Maven mvn takes care of the dependencies
 install: true
