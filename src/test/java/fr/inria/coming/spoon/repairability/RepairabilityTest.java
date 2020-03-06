@@ -1,14 +1,9 @@
 package fr.inria.coming.spoon.repairability;
 
-import com.github.difflib.text.DiffRow;
-import fr.inria.coming.changeminer.analyzer.instancedetector.ChangePatternInstance;
-import fr.inria.coming.changeminer.analyzer.instancedetector.PatternInstancesFromDiff;
-import fr.inria.coming.changeminer.analyzer.instancedetector.PatternInstancesFromRevision;
-import fr.inria.coming.changeminer.entity.FinalResult;
-import fr.inria.coming.changeminer.entity.IRevision;
-import fr.inria.coming.core.entities.RevisionResult;
-import fr.inria.coming.repairability.RepairabilityAnalyzer;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.HashSet;
@@ -16,7 +11,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import com.github.difflib.text.DiffRow;
+
+import fr.inria.coming.changeminer.analyzer.commitAnalyzer.FineGrainDifftAnalyzer;
+import fr.inria.coming.changeminer.analyzer.instancedetector.ChangePatternInstance;
+import fr.inria.coming.changeminer.analyzer.instancedetector.PatternInstancesFromDiff;
+import fr.inria.coming.changeminer.analyzer.instancedetector.PatternInstancesFromRevision;
+import fr.inria.coming.changeminer.entity.FinalResult;
+import fr.inria.coming.changeminer.entity.IRevision;
+import fr.inria.coming.core.entities.RevisionResult;
+import fr.inria.coming.main.ComingMain;
+import fr.inria.coming.repairability.RepairabilityAnalyzer;
+import fr.inria.coming.spoon.utils.TestUtils;
+import gumtree.spoon.diff.Diff;
+import gumtree.spoon.diff.operations.Operation;
+import junit.framework.Assert;
 
 public class RepairabilityTest {
 
@@ -169,4 +180,38 @@ public class RepairabilityTest {
         }
         return hasRepetitiveToolUseForSingleRevision;
     }
+
+    @Test
+    public void testNullPointerException() throws Exception {
+        File s = TestUtils.getInstance().getFile("repairability_test_files/other/" +
+                "react_native_1d0b39/ReactDrawerLayoutManager_1d0b39_s.java");
+        File t = TestUtils.getInstance().getFile("repairability_test_files/other/" +
+                "react_native_1d0b39/ReactDrawerLayoutManager_1d0b39_t.java");
+        FineGrainDifftAnalyzer r = new FineGrainDifftAnalyzer();
+        Diff diffOut = r.getDiff(s, t);
+        for (Operation op : diffOut.getAllOperations()) {
+            Assert.assertTrue(op.getSrcNode().getElements(null).size() > 0);
+        }
+    }
+    
+    @Test(expected = Test.None.class)
+    public void testNullPointerInDiff() throws Exception {
+		File left = getFile("diffcases/test2/old.java");
+		File right = getFile("diffcases/test2/new.java");
+		
+		ComingMain cm = new ComingMain();
+
+		FinalResult result = cm
+				.run(new String[] { "-location", left.getAbsolutePath() + File.pathSeparator + right.getAbsolutePath(),
+						"-input", "filespair", "-mode", "repairability", "-repairtool", "JGenProg", "-parameters", 
+						"include_all_instances_for_each_tool:true:max_nb_commit_analyze:300:max_time_for_a_git_repo:-1"});
+
+		assertNotNull(result);
+	}
+	
+	public File getFile(String name) {
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource(name).getFile());
+		return file;
+	}
 }
