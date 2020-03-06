@@ -2,7 +2,6 @@ detected:
 patch1-Lang-304
 patch1-Lang-587
 patch1-Lang-703
-patch1-Math-1115
 patch1-Math-305
 patch1-Math-369
 patch10-Lang-304
@@ -73,7 +72,6 @@ patch29-Lang-304
 patch3-Lang-304
 patch3-Lang-587
 patch3-Lang-703
-patch3-Math-1115
 patch3-Math-305
 patch3-Math-369
 patch30-Lang-304
@@ -83,7 +81,6 @@ patch33-Lang-304
 patch4-Lang-304
 patch4-Lang-587
 patch4-Lang-703
-patch4-Math-1115
 patch4-Math-305
 patch4-Math-369
 patch5-Lang-304
@@ -111,6 +108,7 @@ patch9-Math-1115
 patch9-Math-988a
 
 undetected:
+patch1-Math-1115=>whole diff not covered
 patch1-Math-290=>wrong patch?
 patch1-Math-988a=>ingredient out of scope
 patch1-Math-988b=>ingredient out of scope
@@ -128,6 +126,7 @@ patch19-Lang-587=>ingredient out of scope
 patch2-Math-290=>wrong patch?
 patch2-Math-988a=>ingredient out of scope
 patch2-Math-988b=>ingredient out of scope
+patch3-Math-1115=>whole diff not covered
 patch3-Math-290=>wrong patch?
 patch3-Math-988a=>ingredient out of scope
 patch3-Math-988b=>ingredient out of scope
@@ -137,6 +136,7 @@ patch36-Lang-304=>ingredient out of scope
 patch37-Lang-304=>ingredient out of scope
 patch38-Lang-304=>ingredient out of scope
 patch39-Lang-304=>ingredient out of scope
+patch4-Math-1115=>whole diff not covered
 patch4-Math-290=>wrong patch?
 patch4-Math-988a=>ingredient out of scope
 patch4-Math-988b=>ingredient out of scope
