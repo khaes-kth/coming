@@ -1,21 +1,23 @@
 package fr.inria.coming.repairability.repairtools;
 
-import com.github.gumtreediff.tree.ITree;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import fr.inria.coming.changeminer.analyzer.instancedetector.ChangePatternInstance;
 import fr.inria.coming.changeminer.analyzer.patternspecification.ChangePatternSpecification;
 import fr.inria.coming.changeminer.entity.IRevision;
 import fr.inria.coming.changeminer.util.PatternXMLParser;
+import fr.inria.coming.utils.ASTInfoResolver;
+import fr.inria.coming.utils.CtEntityType;
 import gumtree.spoon.diff.Diff;
 import gumtree.spoon.diff.operations.DeleteOperation;
 import gumtree.spoon.diff.operations.InsertOperation;
 import gumtree.spoon.diff.operations.Operation;
 import spoon.reflect.code.CtBinaryOperator;
+import spoon.reflect.code.CtIf;
 import spoon.reflect.declaration.CtElement;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class JMutRepair extends AbstractRepairTool {
 
@@ -51,6 +53,13 @@ public class JMutRepair extends AbstractRepairTool {
     public boolean filter(ChangePatternInstance patternInstance, IRevision revision, Diff diff) {
 
         String patternType = patternInstance.getPattern().getName().split(File.pathSeparator)[1];
+
+        CtElement binaryOperatorSrc = patternInstance.getActions().get(0).getSrcNode();
+        CtIf parentIf = (CtIf) ASTInfoResolver.getFirstAncestorOfType(binaryOperatorSrc, CtEntityType.IF);
+        if(!ASTInfoResolver.getPathToRootNode(binaryOperatorSrc).contains(parentIf.getCondition())) {
+        	return false;
+        }
+
         if (patternType.startsWith("binary")) {
 
             Operation upd = patternInstance.getActions().get(0);

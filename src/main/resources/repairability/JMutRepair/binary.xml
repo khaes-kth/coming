@@ -1,6 +1,10 @@
 <pattern name="binary_1">
 
-    <entity id="1" type="BinaryOperator"/>
+	<entity id="4" type="If"/>
+
+    <entity id="1" type="BinaryOperator">
+    	<parent parentId="4" distance="5"/>
+    </entity>
     <action entityId="1" type="UPD"/>
 
     <!--

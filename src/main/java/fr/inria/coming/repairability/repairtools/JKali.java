@@ -83,6 +83,4 @@ public class JKali extends AbstractRepairTool {
             return super.coveredByInstanceNodes(instance, instanceCoveredNodes, diffOperation);
         }
     }
-
-
 }

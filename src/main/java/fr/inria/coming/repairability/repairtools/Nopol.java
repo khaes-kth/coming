@@ -337,5 +337,4 @@ public class Nopol extends AbstractRepairTool {
 
 		return insOp;
 	}
-
 }

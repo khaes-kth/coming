@@ -2,6 +2,7 @@ package fr.inria.coming.utils;
 
 public enum CtEntityType {
     EXPRESSION,
+    IF,
     STATEMENT,
     RETURN,
     ABSTRACT_INVOCATION;

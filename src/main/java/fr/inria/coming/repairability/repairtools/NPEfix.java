@@ -354,8 +354,8 @@ public class NPEfix extends AbstractRepairTool {
 			for (CtElement instanceNode : instanceCoveredNodes) {
 				if (element == instanceNode)
 					return true;
-				if(element == instanceNode.getParent() && element instanceof CtBlock) // see: patch1-Math-1115
-					return true;
+//				if(element == instanceNode.getParent() && element instanceof CtBlock) // see: patch1-Math-1115
+//					return true;
 			}
 		}
 		return false;

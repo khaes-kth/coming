@@ -8,6 +8,9 @@
     <entity id="3" type="*" role="right_operant" value="null">
     	<parent parentId="2" distance="1"/>
     </entity>
+    <entity id="6" type="CtVariableAccess" role="left_operant">
+    	<parent parentId="2" distance="1"/>
+    </entity>
     
     <entity id="4" type="*" role="Then">
     	<parent parentId="1" distance="10"/>

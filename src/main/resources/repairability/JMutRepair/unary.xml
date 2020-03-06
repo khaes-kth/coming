@@ -1,7 +1,10 @@
 <pattern name="unary">
-    <entity id="1" type="UnaryOperator"/>
-    <action entityId="1" type="ANY"/>
+	<entity id="4" type="If"/>
 
+    <entity id="1" type="UnaryOperator">
+    	<parent parentId="4" distance="5"/>
+    </entity>
+    <action entityId="1" type="ANY"/>
 
     <!-- For making sure that operand remains the same -->
     <entity id="2" type="*" role="*"> <!-- For the operand. TODO: shallow operand UNCHANGED CHECK check -->
