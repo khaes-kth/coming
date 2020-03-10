@@ -9,7 +9,7 @@ public class NPEfixTest {
 	
 	@Test
 	public void testGroundTruthCreatedPatches() throws Exception {
-    	RepairabilityTestUtils.checkGroundTruthPatches(getClass(), "NPEfix", 83, 0);
+    	RepairabilityTestUtils.checkGroundTruthPatches(getClass(), "NPEfix", 86, 0);
 	}
 
 //	@Test
